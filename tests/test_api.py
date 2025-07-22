@@ -55,16 +55,19 @@ def test_read_unique_user(client):
     assert response.json() == {
         'username': 'alice',
         'email': 'alice@exemple.com',
-        'id': 1}
+        'id': 1,
+    }
 
 
 def test_read_unique_user_problem(client):
     response = client.get('/users/2')
 
     assert response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR
-    assert response.json() != {'username': 'alice',
-                               'email': 'alice@exemple.com',
-                               'id': 1}
+    assert response.json() != {
+        'username': 'alice',
+        'email': 'alice@exemple.com',
+        'id': 1,
+    }
 
 
 def test_update_user(client):
@@ -73,15 +76,15 @@ def test_update_user(client):
         json={
             'username': 'bob',
             'email': 'bob@exemple.com',
-            'password': 'segredo'
-        }
+            'password': 'segredo',
+        },
     )
 
     assert response.status_code == HTTPStatus.OK
     assert response.json() == {
         'username': 'bob',
         'email': 'bob@exemple.com',
-        'id': 1
+        'id': 1,
     }
 
 
@@ -91,15 +94,15 @@ def test_update_user_problem(client):
         json={
             'username': 'bob',
             'email': 'bob@exemple.com',
-            'password': 'segredo'
-        }
+            'password': 'segredo',
+        },
     )
 
     assert response.status_code == HTTPStatus.NOT_FOUND
     assert response.json() != {
         'username': 'bob',
         'email': 'bob@exemple.com',
-        'id': 1
+        'id': 1,
     }
 
 
@@ -110,7 +113,7 @@ def test_delete_user(client):
     assert response.json() == {
         'username': 'bob',
         'email': 'bob@exemple.com',
-        'id': 1
+        'id': 1,
     }
 
 
@@ -121,5 +124,5 @@ def test_delete_user_problem(client):
     assert response.json() != {
         'username': 'bob',
         'email': 'bob@exemple.com',
-        'id': 1
+        'id': 1,
     }
